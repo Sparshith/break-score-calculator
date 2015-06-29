@@ -26,23 +26,6 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		uglify: {
-			dist: {
-				files: [{
-					expand: true,
-					cwd: 'dist',
-					src: 'jsmain.js',
-					dest: 'dist/'
-				}],
-				options: {
-					report: 'min',
-					mangle: {
-						toplevel: true
-					},
-					compress: {}
-				}
-			}
-		},
 		
 		'gh-pages': {
 			options: {
@@ -52,7 +35,7 @@ module.exports = function(grunt) {
 		}
 	});
 
-    grunt.registerTask('build', ['clean', 'copy:dist', 'htmlmin', 'uglify']);
+    grunt.registerTask('build', ['clean', 'copy:dist', 'htmlmin']);
 
 	require('load-grunt-tasks')(grunt);
 };
