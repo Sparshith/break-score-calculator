@@ -98,5 +98,5 @@ function output(teamarr, r, p, id_op){
 		elem.innerHTML= '<b>'+breakCount[key]+'</b>' + ' out of ' + '<b>' + totalCount[key]+'</b>' + ' teams on score ' + '<b>' + key+'</b>'
 		list.appendChild(elem);
 	}
-	document.getElementById(id_op).replaceChild(list,document.getElementById(id_op).childNodes[2]);
+	document.getElementById(id_op).replaceChild(list,document.getElementById(id_op).childNodes[1]);
 }
