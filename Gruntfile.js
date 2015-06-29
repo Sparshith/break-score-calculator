@@ -39,7 +39,7 @@ module.exports = function(grunt) {
 					mangle: {
 						toplevel: true
 					},
-					compress: true
+					compress: {}
 				}
 			}
 		},
