@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link href='http://fonts.googleapis.com/css?family=Titillium+Web:600,400' rel='stylesheet' type='text/css'>
+
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="jsmain.js"></script>
+		<style>
+		.center{
+			text-align: center;
+		}
+		.center form{
+			display:inline-block;
+		}
+		#output{
+			display: :inline-block;
+			text-align: center;
+			margin-top: 30px;
+			border-radius: 25px;
+			border: 1px solid #dadada;
+			padding: 10px;  
+		}
+		.blah{
+			margin-bottom: 50px;
+			text-align: center;
+		}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+		<div class="col-md-6 col-md-offset-3 blah">
+		<h1> Debate Break-Score Calculator</h1>
+		</div>
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3">
+					<form style="height:100%; vertical-align: middle" class="center">
+						<div class="form-group">
+							<label for="teams">Number of teams</label>
+							
+									<input type="number" class="form-control" id="teams" placeholder="">
+							
+						</div>
+						<div class="form-group">
+							<label for="rounds">Number of rounds</label>
+					
+									<input type="number" class="form-control" id="rounds" placeholder="">
+							
+						</div>
+						<div class="form-group">
+							<label for="rounds">Number of breaking teams</label>
+					
+									<input type="number" class="form-control" id="break" placeholder="">
+							
+						</div>
+						<div class="col-md-6">
+						<button type="button" class="btn btn-default center-block" id="submit" onclick="APbhalu()">Asian Parliamentary</button>
+						</div>
+						<div class="col-md-6">
+						<button type="button" class="btn btn-default center-block" id="submit" onclick="BPbhalu()">British Parliamentary</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3 output" id="output">
+				<p>
+				<h4>Breaking teams composition for the two extreme cases:</h4>
+				<div class="col-md-6" id="pulluplose">
+					<h5>All Pull-ups Lose</h5>
+				</div>
+				<div class="col-md-6" id="pullupwin">
+					<h5>All Pull-ups Win</h5>
+				</div>
+				</div>
+			</div>
+		</div>
+		
+	</body>
+</html>
