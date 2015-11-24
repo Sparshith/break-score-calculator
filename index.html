@@ -8,8 +8,11 @@
 
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="jsmain.js"></script>
 		<style>
+
 		.center{
 			text-align: center;
 		}
@@ -39,50 +42,47 @@
 				<div class="col-md-6 col-md-offset-3">
 					<form style="height:100%; vertical-align: middle" class="center">
 						<div class="form-group">
-							<label for="teams">Number of teams</label>
-							
-									<input type="number" class="form-control" id="teams" placeholder="">
-							
-						</div>
-						<div class="form-group">
-							<label for="rounds">Number of rounds</label>
-					
-									<input type="number" class="form-control" id="rounds" placeholder="">
-							
-						</div>
-						<div class="form-group">
-							<label for="rounds">Number of breaking teams</label>
-					
-									<input type="number" class="form-control" id="break" placeholder="">
-							
+							<div class="form-group">
+								<b>Number of teams</b>
+										<input type="number" class="form-control" id="teams" value = "64" placeholder="">
+							</div>
+							<div class="form-group">
+								<b>Number of breaking teams</b>
+										<input type="number" class="form-control" id="break" value = "16" placeholder="">
+							</div>
+							<div class="form-group">
+								<b>Number of rounds</b>	
+										<input type="number" class="form-control"id="rounds" value = "6" placeholder="">
+							</div>
 						</div>
 						<div class="col-md-6">
-						<button type="button" class="btn btn-default center-block" id="submit" onclick="APbhalu()">Asian Parliamentary</button>
+							<button type="button" class="btn btn-default center-block submit-btn" data-format="ap">Asian Parliamentary</button>
 						</div>
 						<div class="col-md-6">
-						<button type="button" class="btn btn-default center-block" id="submit" onclick="BPbhalu()">British Parliamentary</button>
+							<button type="button" class="btn btn-default center-block submit-btn" data-format="bp">British Parliamentary</button>
 						</div>
 					</form>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-6 col-md-offset-3 output" id="output">
-				<p>
-				<h4>Breaking teams composition for the two extreme cases:</h4>
-				<div class="row">
-				<div class="col-md-6">
-					<h5>All Pull-ups Lose</h5>
-				</div>
-				<div class="col-md-6">
-					<h5>All Pull-ups Win</h5>
-				</div>
-				</div>
-				<div class="col-md-6" id="pulluplose">
-				<h5></h5>
-				</div>
-				<div class="col-md-6" id="pullupwin">
-				<h5></h5>
-				</div>
+						<h4>Breaking teams composition for the two extreme cases:</h4>
+					<div class="row">
+						<div class="col-md-6">
+							<h5>All Pull-ups Lose</h5>
+						</div>
+						<div class="col-md-6">
+							<h5>All Pull-ups Win</h5>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<ul id="pulluplose">
+						</ul>
+					</div>
+					<div class="col-md-6">
+						<ul id="pullupwin">
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>

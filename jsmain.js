@@ -1,102 +1,96 @@
-function APbhalu(){
-	var p = parseInt(document.getElementById('teams').value);
-	var q = parseInt(document.getElementById('rounds').value);
-	var r = parseInt(document.getElementById('break').value);
-	var teamarr1=[];
-	var teamarr2=[];
-	for(var i=0; i<p; i++)
-	{
-		teamarr1.push(0);
-		teamarr2.push(0);
+ $(document).ready(function(e) {   
+	$('.submit-btn').on('click', function(){
+		var format = $(this).data('format');
+		calculateBreaks(format);
+	});
+ });
+
+function calculateBreaks(format){
+	var num_teams = $('#teams').val();
+	var num_rounds = $('#rounds').val();
+	var num_break = $('#break').val();
+	var teamarr1 = [];
+	var teamarr2 = [];
+
+	//All teams at zero points in the beginning.
+	for (var i=0; i<num_teams; i++) {
+       	teamarr1.push(0);
+     	teamarr2.push(0);      
+    }
+		
+	switch(format) {	
+		case 'ap': 	
+			for (var j = 0; j < num_rounds; j++) {
+					for (var i = 0; i < num_teams; i++) {
+						if (i % 2 === 0) {   	//Case 1 : Where all pull ups win
+							teamarr1[i]+=1;
+						} else {			//Case 2 : Where all pull ups lose
+							teamarr2[i]+=1;
+						}
+					}
+					teamarr1.sort();
+					teamarr2.sort();
+				}
+
+			break;
+
+		case 'bp': 
+				for (var j = 0; j < num_rounds; j++) {
+						for (var i = 0; i < num_teams; i++) {
+							//Case 1 : Where all pull ups win
+							if(i%4 === 0){
+								teamarr1[i]+=3;
+								teamarr1[i+1]+=2;
+								teamarr1[i+2]+=1;				
+							}
+							//Case 2 : Where all pull ups lose
+						    if(i%4 === 0){
+								teamarr2[i+1]+=1;
+								teamarr2[i+2]+=2;
+								teamarr2[i+3]+=3;
+
+							}
+						}
+						teamarr1.sort();
+						teamarr2.sort();
+					}
+					break;
+		default: 
+				alert('No action specified');
+				return false;
 	}
 
-	
-	for(var j=0; j<q; j++)
-	{
-		for(var i=0; i<p; i++){
-			//Case 1 : Where all pull ups win
-			if(i%2 === 0){
-				teamarr1[i]+=1;
-			}
-			//Case 1 : Where all pull ups lose
-			else{
-				teamarr2[i]+=1;
-			}
-		}
-		teamarr1.sort();
-		teamarr2.sort();
-	}
-	output(teamarr1, r, p, 'pulluplose');
-	output(teamarr2, r, p, 'pullupwin');
+	output(teamarr1, num_break, num_teams, 'pulluplose');
+	output(teamarr2, num_break, num_teams, 'pullupwin');
 }
 
-function BPbhalu(){
-	var p = parseInt(document.getElementById('teams').value);
-	var q = parseInt(document.getElementById('rounds').value);
-	var r = parseInt(document.getElementById('break').value);
-	var teamarr1=[];
-	var teamarr2=[];
-	for(var i=0; i<p; i++)
-	{
-		teamarr1.push(0);
-		teamarr2.push(0);
-	}
-
-	
-	for(var j=0; j<q; j++)
-	{
-		for(var i=0; i<p; i++){
-			//Case 1 : Where all pull ups win
-			if(i%4 === 0){
-				teamarr1[i]+=3;
-				teamarr1[i+1]+=2;
-				teamarr1[i+2]+=1;				
-			}
-			//Case 1 : Where all pull ups lose
-		    if(i%4 === 0){
-				teamarr2[i+1]+=1;
-				teamarr2[i+2]+=2;
-				teamarr2[i+3]+=3;
-
-			}
-		}
-		console.log(teamarr1, teamarr2);
-		teamarr1.sort();
-		teamarr2.sort();
-
-		console.log(teamarr1, teamarr2);
-	}
-	output(teamarr1, r, p, 'pulluplose');
-	output(teamarr2, r, p, 'pullupwin');
-}
-
-
-function output(teamarr, r, p, id_op){
-	var breakTeams = teamarr.slice(-r);
+function output(teamarr, num_break, num_teams, id_op){
+	console.log(teamarr);
+	console.log(num_break);
+	console.log(num_teams);
+	console.log(id_op);
+	var breakTeams = teamarr.slice(-num_break);
 	var breakMin = breakTeams[0];
-	var breakMax = breakTeams[r-1];
-	var breakCount={};
-	var totalCount={};
-	for(var i=breakMin;i<=breakMax;i++){
+	var breakMax = breakTeams[num_break-1];
+	var breakCount = {};
+	var totalCount = {};
+	for(var i = breakMin;i <= breakMax;i++) {
 		breakCount[i] = 0;
-		totalCount[i]=0;
+		totalCount[i] = 0;
 	}
-	for (var i=0; i<breakTeams.length; i++){
+	for (var i = 0;i<breakTeams.length;i++) {
 		breakCount[breakTeams[i]]++;
 	}
-	for (var i=0; i<p; i++){
+	for (var i = 0;i<num_teams;i++){
 		if (teamarr[i]>=breakMin){
 			totalCount[teamarr[i]]++;;
 		}
 	}
 
-	
-	
-	var list = document.createElement("ul");
+	results_div = $('#'+id_op);
+	results_div.html("");
+	console.log(breakCount);
 	for (key in breakCount) {
-		var elem = document.createElement("li");
-		elem.innerHTML= '<b>'+breakCount[key]+'</b>' + ' out of ' + '<b>' + totalCount[key]+'</b>' + ' teams on score ' + '<b>' + key+'</b>'
-		list.appendChild(elem);
-	}
-	document.getElementById(id_op).replaceChild(list,document.getElementById(id_op).childNodes[1]);
+        results_div.append('<li><b>'+breakCount[key]+'</b>' + ' out of ' + '<b>' + totalCount[key]+'</b>' + ' teams on score ' + '<b>' +key+'</b>');
+    }
 }
